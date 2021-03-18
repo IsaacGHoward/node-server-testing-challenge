@@ -32,8 +32,22 @@ describe('POST /api/books', () => {
         "book_author":"Test Author",
         "book_title":"A Test Title"
       })
+      .expect(400);
+  })
+})
+
+describe('DELETE /api/books/:id', () => {
+  it('deletes the book', () => {
+    let latestBookID;
+    request(server).get('/api/books')
       .then(res => {
-        expect(400);
+        latestBookID = res.body[res.body.length-1].book_id;
+        return request(server).delete(`/api/books/${latestBookID}`)
+          .expect(204)
       })
+  })
+  it('handles deleting a non existent ID', () => {
+    request(server).delete('/api/books/0')
+      .expect(204);
   })
 })
