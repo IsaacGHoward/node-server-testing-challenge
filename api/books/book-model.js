@@ -21,10 +21,12 @@ const create = async book => {
     });
  return findById(created_book_id);
 }
-function remove(){
 
+function remove(book_id){
+  return dbConfig('books')
+    .where('books.book_id', book_id)
+    .del();
 }
-
 module.exports = {
   getBooks,
   create,

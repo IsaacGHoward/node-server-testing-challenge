@@ -17,4 +17,10 @@ router.post('/', (req,res) => {
     })
 })
 
+router.delete('/:id', (req,res) => {
+  Books.remove(req.params.id)
+    .then(() => {
+      res.json({'message': 'Book Deleted'});
+    })
+})
 module.exports = router;
