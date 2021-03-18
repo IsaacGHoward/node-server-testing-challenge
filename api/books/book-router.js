@@ -10,4 +10,11 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req,res) => {
+  Books.create(req.body)
+    .then(newbook => {
+      res.json(newbook);
+    })
+})
+
 module.exports = router;
