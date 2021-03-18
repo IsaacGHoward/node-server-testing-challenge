@@ -13,7 +13,10 @@ router.get('/', (req, res) => {
 router.post('/', (req,res) => {
   Books.create(req.body)
     .then(newbook => {
-      res.json(newbook);
+      res.status(201).json(newbook);
+    })
+    .catch(err => {
+      res.status(400).json(err);
     })
 })
 
